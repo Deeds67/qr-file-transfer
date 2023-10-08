@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import { convertFileToStringArray } from "../libs/compression/Conversions";
-import { DebounceInput } from "react-debounce-input";
 import BarcodeLooper from "../components/BarcodeLooper";
 import { Button, Input, Typography } from "@material-tailwind/react";
 
