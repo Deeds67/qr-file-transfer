@@ -26,11 +26,11 @@ const Upload = () => {
         if (file) {
             convertFileToStringArray(file, maxChunkSize).then(setFileAsStringArray)
         }
-    }, [file]);
+    }, [maxChunkSize, file]);
 
 
     return (
-        <div>
+        <div className="flex flex-col items-center">
             <label htmlFor="file-upload">Choose a file to upload:</label>
             <input
                 id="file-upload"
@@ -38,26 +38,30 @@ const Upload = () => {
                 onChange={handleFileChange}
             />
             {file && <p>Selected file: {file.name}</p>}
-            <DebounceInput element="input" type="number" label="Max Chunk Size" id="max-chunk-size" value={maxChunkSize}
+            {file && <label htmlFor="max-chunk-size">File chunk size:</label> }
+            {file && <DebounceInput element="input" type="number" label="Max Chunk Size" id="max-chunk-size" value={maxChunkSize}
                     minLength={3}
                     debounceTimeout={500}
                     onChange={event => {
                         const chunkSize = parseInt(event.target.value);
                         if (chunkSize <= 1000) {
+                            console.log('setting max chunk size to ' + chunkSize);
                             setMaxChunkSize(chunkSize);
                         }
                     }} />
+                }
                 <br />
-                <DebounceInput element="input"  type="number" label="Display Rate (fps): " id="qr-display-time" value={Math.trunc(1000 / displayTime)}
-                    maxLength={3}
-                    debounceTimeout={500}
-                    onChange={event => {
-                        const time = parseInt(event.target.value);
-                        setDisplayTime(Math.trunc(1000 / time));
-                    }
-                    } />
-
-            <BarcodeLooper fileDataArr={fileAsStringArray || null} displayTime={displayTime} displayRange={sliderValue}></BarcodeLooper>
+            {file && <label htmlFor="qr-display-time">Display Rate (fps): </label> }
+            {file && <DebounceInput element="input"  type="number" label="Display Rate (fps): " id="qr-display-time" value={Math.trunc(1000 / displayTime)}
+                maxLength={3}
+                debounceTimeout={500}
+                onChange={event => {
+                    const time = parseInt(event.target.value);
+                    setDisplayTime(Math.trunc(1000 / time));
+                }
+                } />
+            }
+            {file && <BarcodeLooper fileDataArr={fileAsStringArray || null} displayTime={displayTime} displayRange={sliderValue}></BarcodeLooper>}
 
         </div>
     );
