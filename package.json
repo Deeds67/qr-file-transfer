@@ -15,7 +15,6 @@
     "qr-scanner": "^1.2.0",
     "qrcode": "^1.5.3",
     "react": "^18",
-    "react-debounce-input": "^3.3.0",
     "react-dom": "^18",
     "zlibjs": "^0.3.1"
   },
