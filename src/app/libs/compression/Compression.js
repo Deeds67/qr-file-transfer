@@ -1,6 +1,6 @@
 import Zlib from 'zlibjs/bin/zlib_and_gzip.min.js'
 
-// Doos lank gevat om hierdie piece of shit uit te figure https://github.com/Explodey54/minecraft-artifier-js/blob/df81723c4f7a488a49ba09f94d458eac3a74680f/app/models/schematics.js
+// https://github.com/Explodey54/minecraft-artifier-js/blob/df81723c4f7a488a49ba09f94d458eac3a74680f/app/models/schematics.js
 const zl = Zlib.Zlib
 
 export function compressArrayBufferToBase64String(arrayBuffer) {
