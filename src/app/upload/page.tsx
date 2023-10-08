@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { convertFileToStringArray } from "../libs/compression/Conversions";
 import { DebounceInput } from "react-debounce-input";
 import BarcodeLooper from "../components/BarcodeLooper";
-import { Input, Typography } from "@material-tailwind/react";
+import { Button, Input, Typography } from "@material-tailwind/react";
 
 
 const Upload = () => {
@@ -31,37 +31,32 @@ const Upload = () => {
 
     return (
             <div className="flex flex-col items-center">
-                <h2>Choose a file to upload:</h2>
-                <input
-                    id="file-upload"
-                    type="file"
-                    onChange={handleFileChange}
-                />
-                {file && <p>Selected file: {file.name}</p>}
+                {!file &&
+                <div>
+                    <h2>Choose a file to upload:</h2>
+                    <input
+                        id="file-upload"
+                        type="file"
+                        onChange={handleFileChange}
+                    />  
+                </div>}
+                
+                {file && <Typography>Selected file: {file.name}</Typography>}
 
                 {file && (
-                    <div className="flex items-center">
-                        <label htmlFor="qr-display-time" className="mr-4">Display Rate (fps): </label>
-                        <DebounceInput
-                            element="input"
+                    <div className="flex items-center flex-col gap-5 pt-5 pb-10">
+                        <Input
+                            className="mg-100"
                             type="number"
                             label="Display Rate (fps): "
                             id="qr-display-time"
                             value={Math.trunc(1000 / displayTime)}
                             maxLength={3}
-                            debounceTimeout={500}
                             onChange={(event) => {
                                 const time = parseInt(event.target.value);
                                 setDisplayTime(Math.trunc(1000 / time));
                             }}
-                            className="w-20"
                         />
-                    </div>
-                )}
-
-                
-                {file && (
-                    <div className="flex items-center">
                         <div className="w-[32rem]">
                             <Input 
                                 type="number"
@@ -94,7 +89,7 @@ const Upload = () => {
                                     clipRule="evenodd"
                                 />
                                 </svg>
-                                Changing this value will change the amount of data inside each barcode.
+                                Changing this value will change the amount of data in each barcode
                             </Typography>
                             </div>
                         
@@ -103,6 +98,17 @@ const Upload = () => {
                 
                 {file && <BarcodeLooper fileDataArr={fileAsStringArray || null} displayTime={displayTime} displayRange={sliderValue}></BarcodeLooper>}
 
+                {file && <div className="flex justify-left">
+                    <Button 
+                    onClick={() => {
+                        setFile(null);
+                        setFileAsStringArray(null);
+                        setDisplayTime(Math.trunc(1000 / 28));
+                    }}>
+                    Reset
+                    </Button>
+                </div>
+                }
             </div>
         );
 };
