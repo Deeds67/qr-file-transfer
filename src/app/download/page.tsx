@@ -141,29 +141,28 @@ const Download = () => {
                     <video ref={videoRef}></video>
                 </canvas>
 
+                {!totalChunks && <div className="p-6">
+                    <h5
+                    className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
+                    Let's start scanning
+                    </h5>
+                    <p className="mb-4 text-base text-neutral-600 dark:text-neutral-200">
+                    Scan the barcodes on the /upload page to download the file
+                    </p>
+                </div>}
+
                 {totalChunks && !fileContent && <div className="p-6">
                     <h5
                     className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
-                    Scanning underway!
+                    Scanning underway...
                     </h5>
                     <p className="mb-4 text-base text-neutral-600 dark:text-neutral-200">
-                    Great, you're almost there!
+                    Great, you're almost there! Continue scanning...
                     </p>
 
                     <Progress value={(chunks.size / totalChunks) * 100} />
 
                 </div>}
-
-                {!totalChunks && <div className="p-6">
-                    <h5
-                    className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
-                    Let's start downloading
-                    </h5>
-                    <p className="mb-4 text-base text-neutral-600 dark:text-neutral-200">
-                    Scan the barcodes on the /upload page to download the file
-                    </p>
-                </div>
-                }
 
                 {fileContent && <div className="p-6">
                     <h5
