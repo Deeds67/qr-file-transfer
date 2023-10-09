@@ -11,14 +11,13 @@ const Download = () => {
     const [totalChunks, setTotalChunks] = useState<number | null>();
     const [fileName, setFileName] = useState<string>();
     const [fileContent, setFileContent] = useState<any | null>(null);
-    // const [morseBrackets, updateMorseBrackets] = useState<Set<number>>(new Set<number>());
     const [webWorkers, setWebWorkers] = useState<Worker[]>();
-    // given imageData - it will process for QR code and if found return the code data: string, via callback/onmessage listener.
+    const [fileDownloaded, setFileDownloaded] = useState<boolean>(false);
+
     const canvasElement: MutableRefObject<HTMLCanvasElement | null> = useRef(null);
     const loadingMessage = useRef(null);
     const videoRef = useRef<HTMLVideoElement>(null);
     const downloadButton = useRef<HTMLButtonElement>(null);
-    const [fileDownloaded, setFileDownloaded] = useState<boolean>(false);
 
     // let workerCount = (navigator.hardwareConcurrency - 1) || 4;  // TODO: Improve... tried navigator.hardwareConcurrency but had issues on mobile
     let workerCount = 1;
@@ -72,16 +71,13 @@ const Download = () => {
 
     // When we have all of the chunks, we aggregate all of the content, uncompress it, and set the fileContent state
     useEffect(() => {
-        if (chunks.size == totalChunks) {
-            console.log("Aggregating chunks");
+        if (chunks.size === totalChunks) {
             var combinedBase64 = '';
             for (let i = 0; i < chunks.size; i++) {
                 combinedBase64 = combinedBase64 + chunks.get(i);
             }
             const uncompressed = decompressBase64StringToArrayBuffer(combinedBase64)
             setFileContent(uncompressed);
-        } else {
-            console.log(`chunks.size ${chunks.size}. totalChunnks ${totalChunks}`)
         }
     }, [chunks, totalChunks]);
 
@@ -133,7 +129,6 @@ const Download = () => {
         return () => {
             copiedVideoRef && stopStreamedVideo(copiedVideoRef)
         }
-        // eslint-disable-next-line
     }, [canvasElement, loadingMessage, videoRef, webWorkers]);
 
     return (
