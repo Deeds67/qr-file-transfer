@@ -4,7 +4,7 @@ import React, { MutableRefObject, useEffect, useRef, useState } from "react";
 import { decompressBase64StringToArrayBuffer } from "../libs/compression/Compression";
 import getCameraAccess from "./Camera";
 import runScanLoop from "./BarcodeProcessor";
-import { Button } from "@material-tailwind/react";
+import { Button, Progress } from "@material-tailwind/react";
 
 const Download = () => {
     const [chunks, setChunk] = useState<Map<number, string>>(new Map());
@@ -18,6 +18,7 @@ const Download = () => {
     const loadingMessage = useRef(null);
     const videoRef = useRef<HTMLVideoElement>(null);
     const downloadButton = useRef<HTMLButtonElement>(null);
+    const [fileDownloaded, setFileDownloaded] = useState<boolean>(false);
 
     // let workerCount = (navigator.hardwareConcurrency - 1) || 4;  // TODO: Improve... tried navigator.hardwareConcurrency but had issues on mobile
     let workerCount = 1;
@@ -25,6 +26,14 @@ const Download = () => {
     useEffect(() => {
         setWebWorkers(Array.from((new Array(workerCount)).keys()).map(x => new Worker('./workers/imageWorker.js')));
     }, []);
+
+    function resetState(): void {
+        setChunk(new Map());
+        setTotalChunks(null);
+        setFileName("");
+        setFileContent(null);
+        setFileDownloaded(false);
+    }
 
     useEffect(() => {
         console.log("Registering web worker feedback handlers");
@@ -86,6 +95,7 @@ const Download = () => {
                 document.body.appendChild(a)
                 a.click();
                 document.body.removeChild(a)
+                setFileDownloaded(true);
             }
         }
     }, [downloadButton, fileContent, fileName]);
@@ -132,33 +142,52 @@ const Download = () => {
                 className="block rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
                 <div id="loadingMessage" ref={loadingMessage}>🎥 Unable to access video stream (please make sure you have a webcam enabled)</div>
 
-                {/* <a href="#!">
-                    <img
-                    className="rounded-t-lg"
-                    src="https://tecdn.b-cdn.net/img/new/standard/nature/184.jpg"
-                    alt="" />
-                </a> */}
                 <canvas id="canvas" ref={canvasElement} hidden>
                     <video ref={videoRef}></video>
                 </canvas>
-                {fileContent && <Button ref={downloadButton} >Download</Button>}
-                <div className="p-6">
+
+                {totalChunks && !fileContent && <div className="p-6">
                     <h5
                     className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
-                    Card title
+                    Scanning underway!
                     </h5>
                     <p className="mb-4 text-base text-neutral-600 dark:text-neutral-200">
-                    Some quick example text to build on the card title and make up the
-                    bulk of the card's content.
+                    Great, you're almost there!
                     </p>
-                    <button
-                    type="button"
-                    className="inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
-                    data-te-ripple-init
-                    data-te-ripple-color="light">
-                    Button
-                    </button>
+
+                    <Progress value={(chunks.size / totalChunks) * 100} />
+
+                </div>}
+
+                {!totalChunks && <div className="p-6">
+                    <h5
+                    className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
+                    Let's start downloading
+                    </h5>
+                    <p className="mb-4 text-base text-neutral-600 dark:text-neutral-200">
+                    Scan the barcodes on the /upload page to download the file
+                    </p>
                 </div>
+                }
+
+                {fileContent && <div className="p-6">
+                    <h5
+                        className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
+                        Scanning complete
+                    </h5>
+                    <p className="mb-4 text-base text-neutral-600 dark:text-neutral-200">All QR chunks have been successfully processed!</p>
+                    <Button ref={downloadButton} className="mb-10">
+                        Download file
+                    </Button>
+
+                    {fileDownloaded && <div>
+                        <p className="mb-4 text-base text-neutral-600 dark:text-neutral-200">Downloading another file?</p>
+                            <Button onClick={() => resetState()}>
+                                Reset
+                            </Button>
+                        </div>}
+                    
+                </div>}
             </div>
         </div>
     );
