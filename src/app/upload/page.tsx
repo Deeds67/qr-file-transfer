@@ -95,7 +95,7 @@ const Upload = () => {
                                     clipRule="evenodd"
                                 />
                                 </svg>
-                                Changing this value will change the amount of data in each barcode
+                                Changing this value will adjust the amount of data in each barcode
                             </Typography>
                             </div>
                         
