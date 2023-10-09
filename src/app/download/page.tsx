@@ -42,10 +42,10 @@ const Download = () => {
                         if (map.has(index)) {
                             return map;
                         } else {
-                            console.log("updating chunks with new map")
+                            console.log("updating chunks with new map and index ", index)
                             const base64Index = containsFileInfo ? 2 : 1;
                             const base64 = split[base64Index];
-                            return new Map(map.set(index, base64));
+                            return new Map([...map, [index, base64]]);
                         }
                     });
                     if (!totalChunks) {
@@ -63,7 +63,7 @@ const Download = () => {
 
     // When we have all of the chunks, we aggregate all of the content, uncompress it, and set the fileContent state
     useEffect(() => {
-        if (chunks.size === totalChunks) {
+        if (chunks.size == totalChunks) {
             console.log("Aggregating chunks");
             var combinedBase64 = '';
             for (let i = 0; i < chunks.size; i++) {
