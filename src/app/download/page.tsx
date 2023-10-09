@@ -144,7 +144,7 @@ const Download = () => {
                 {!totalChunks && <div className="p-6">
                     <h5
                     className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
-                    Let's start scanning
+                    Let&apos;s start scanning
                     </h5>
                     <p className="mb-4 text-base text-neutral-600 dark:text-neutral-200">
                     Scan the barcodes on the /upload page to download the file
@@ -157,7 +157,7 @@ const Download = () => {
                     Scanning underway...
                     </h5>
                     <p className="mb-4 text-base text-neutral-600 dark:text-neutral-200">
-                    Great, you're almost there! Continue scanning...
+                    Great, you&apos;re almost there! Continue scanning...
                     </p>
 
                     <Progress value={(chunks.size / totalChunks) * 100} />
