@@ -24,7 +24,6 @@ const Download = () => {
 
     useEffect(() => {
         setWebWorkers(Array.from((new Array(workerCount)).keys()).map(x => new Worker('./workers/imageWorker.js')));
-        // eslint-disable-next-line
     }, []);
 
     useEffect(() => {
@@ -43,6 +42,7 @@ const Download = () => {
                         if (map.has(index)) {
                             return map;
                         } else {
+                            console.log("updating chunks with new map")
                             const base64Index = containsFileInfo ? 2 : 1;
                             const base64 = split[base64Index];
                             return new Map(map.set(index, base64));

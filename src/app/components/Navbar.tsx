@@ -7,6 +7,7 @@ import {
   Typography,
   Button,
   IconButton,
+  Collapse,
 } from "@material-tailwind/react";
 import { DialogDefault } from "./ShareDialog";
  
@@ -108,14 +109,14 @@ export function NavbarDefault() {
           )}
         </IconButton>
       </div>
-      <MobileNav open={openNav}>
+      <Collapse open={openNav}>
         <div className="container mx-auto">
           {navList}
         </div>
         <div className="mb-2">
             <span><DialogDefault /></span>
         </div>
-      </MobileNav>
+      </Collapse>
     </Navbar>
   );
 }
