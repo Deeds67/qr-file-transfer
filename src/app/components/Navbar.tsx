@@ -8,6 +8,7 @@ import {
   Button,
   IconButton,
 } from "@material-tailwind/react";
+import { DialogDefault } from "./ShareDialog";
  
 export function NavbarDefault() {
   const [openNav, setOpenNav] = React.useState(false);
@@ -66,6 +67,9 @@ export function NavbarDefault() {
           QR File Transfer
         </Typography>
         <div className="hidden lg:block">{navList}</div>
+        <div className="hidden lg:inline-block">
+          <span><DialogDefault /></span>
+        </div>
         <IconButton
           variant="text"
           className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
@@ -107,6 +111,9 @@ export function NavbarDefault() {
       <MobileNav open={openNav}>
         <div className="container mx-auto">
           {navList}
+        </div>
+        <div className="mb-2">
+            <span><DialogDefault /></span>
         </div>
       </MobileNav>
     </Navbar>
