@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { convertFileToStringArray } from "../libs/compression/Conversions";
 import BarcodeLooper from "../components/BarcodeLooper";
-import { Button, Input, Typography } from "@material-tailwind/react";
+import { Alert, Button, Input, Typography } from "@material-tailwind/react";
 
 
 const Upload = () => {
@@ -30,6 +30,7 @@ const Upload = () => {
 
     return (
             <div className="flex flex-col items-center">
+                {!file && <Alert className="mb-4 justify-center align-center">Upload a file to get started</Alert>}
                 {!file && 
                     <div className="flex items-center justify-center w-full">
                         <label htmlFor="file-upload" className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
@@ -45,6 +46,7 @@ const Upload = () => {
                     </div>
                 }
                 
+                {file && <Alert className="mb-4 justify-center align-center">Open the download page on another device and scan the QR codes to download the file</Alert>}
                 {file && <Typography>Selected file: {file.name}</Typography>}
 
                 {file && (
