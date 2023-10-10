@@ -132,12 +132,12 @@ const Download = () => {
     }, [canvasElement, loadingMessage, videoRef, webWorkers]);
 
     return (
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center ">
             <div
                 className="block rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
                 <div id="loadingMessage" ref={loadingMessage}>🎥 Unable to access video stream (please make sure you have a webcam enabled)</div>
 
-                <canvas id="canvas" ref={canvasElement} hidden>
+                <canvas className="w-[450px] lg:w-full" id="canvas" ref={canvasElement} hidden>
                     <video ref={videoRef}></video>
                 </canvas>
 
