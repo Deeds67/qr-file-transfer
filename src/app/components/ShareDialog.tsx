@@ -6,6 +6,8 @@ import {
   DialogBody,
   DialogFooter,
 } from "@material-tailwind/react";
+
+import Image from 'next/image'
  
 export function DialogDefault() {
   const [open, setOpen] = React.useState(false);
@@ -20,19 +22,13 @@ export function DialogDefault() {
       <Dialog open={open} handler={handleOpen}>
         <DialogHeader>Scan this barcode to open the downloads page</DialogHeader>
         <DialogBody divider>
-          QR Code goes here
+          <div className="flex items-center justify-center">
+            <Image src="/download.png" alt="Download" width="320" height="320"/>
+          </div>
         </DialogBody>
         <DialogFooter>
-          <Button
-            variant="text"
-            color="red"
-            onClick={handleOpen}
-            className="mr-1"
-          >
-            <span>Cancel</span>
-          </Button>
           <Button variant="gradient" color="green" onClick={handleOpen}>
-            <span>Confirm</span>
+            <span>Close</span>
           </Button>
         </DialogFooter>
       </Dialog>
