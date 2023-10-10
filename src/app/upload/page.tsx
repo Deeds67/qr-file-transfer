@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { convertFileToStringArray } from "../libs/compression/Conversions";
-import BarcodeLooper from "../components/BarcodeLooper";
+import BarcodeLooper from "./BarcodeLooper";
 import { Alert, Button, Input, Typography } from "@material-tailwind/react";
 
 
