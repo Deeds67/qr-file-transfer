@@ -16,7 +16,7 @@ export default function Home() {
             <h3 className="text-xl font-bold inline-block px-2 py-1">Upload Your File:</h3>
           </div>
           <div className="w-full md:w-2/3">
-            <p className="text-lg mb-8">Click on the <Link href="/upload">'Upload' button</Link>, select any file you want to transfer, and let our system work its magic. Your file will be converted into a series of barcodes.</p>
+            <p className="text-lg mb-8">Click on the <Link href="/upload">&apos;Upload&apos; button</Link>, select any file you want to transfer, and let our system work its magic. Your file will be converted into a series of barcodes.</p>
           </div>
         </div>
         <div className="flex flex-col md:flex-row">
@@ -24,7 +24,7 @@ export default function Home() {
             <h3 className="text-xl font-bold inline-block px-2 py-1">Visit the Download Page:</h3>
           </div>
           <div className="w-full md:w-2/3">
-            <p className="text-lg mb-8">On the target device, visit our website and go to the <Link href="/download">'Download' page</Link>. Here, you'll find a barcode scanner. Use your device's camera to scan the series of barcodes.</p>
+            <p className="text-lg mb-8">On the target device, visit our website and go to the <Link href="/download">&apos;Download&apos; page</Link>. Here, you&apos;ll find a barcode scanner. Use your device&apos;s camera to scan the series of barcodes.</p>
           </div>
         </div>
         <div className="flex flex-col md:flex-row">
@@ -32,14 +32,14 @@ export default function Home() {
             <h3 className="text-xl font-bold inline-block px-2 py-1">Download Your File: </h3>
           </div>
           <div className="w-full md:w-2/3">
-            <p className="text-lg mb-8">As you scan each barcode, the corresponding part of your file will be reconstructed. Once all barcodes are scanned, your original file is complete and ready for download. It's that simple!</p>
+            <p className="text-lg mb-8">As you scan each barcode, the corresponding part of your file will be reconstructed. Once all barcodes are scanned, your original file is complete and ready for download. It&apos;s that simple!</p>
           </div>
         </div>
         <h2 className="text-3xl font-bold mb-4">Why Choose Us?</h2>
         <ul className="text-lg mb-8 list-disc list-inside">
           <li><span className="font-bold">Security First: </span>Your files never leave your devices, ensuring complete privacy and security.</li>
           <li><span className="font-bold">No Internet Dependency: </span>Transfer files even when you have no internet connection.</li>
-          <li><span className="font-bold">Trust: </span>Don't take our word for it. This site is completely open source. Check out the source code on <Link href="https://github.com/Deeds67/qr-file-transfer">GitHub at https://github.com/Deeds67/qr-file-transfer</Link></li>
+          <li><span className="font-bold">Trust: </span>Don&apos;t take our word for it. This site is completely open source. Check out the source code on <Link href="https://github.com/Deeds67/qr-file-transfer">GitHub at https://github.com/Deeds67/qr-file-transfer</Link></li>
         </ul>
         <Button size="lg">
           <Link href="/upload">
