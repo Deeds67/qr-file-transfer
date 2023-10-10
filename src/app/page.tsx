@@ -7,7 +7,7 @@ import Link from 'next/link';
 export default function Home() {
   return (
     <main className="flex flex-col items-center p-8">
-      <div className="w-2/3 mx-auto">
+      <div className="2xl:w-1/2 xl:w-2/3 md:w-full mx-auto">
         <h1 className="text-4xl font-bold mb-4">Securely transfer files without the Internet!</h1>
         <p className="text-lg mb-8">This site offers you an open source, secure, and completely free way to transfer files between devices that are not connected to the internet. It involves converting your files into a series of unique barcodes, allowing you to download them on a different device by simply scanning these barcodes.</p>
         <h2 className="text-3xl font-bold mb-5">How It Works</h2>
