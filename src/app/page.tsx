@@ -35,12 +35,12 @@ export default function Home() {
             <p className="text-lg mb-8">As you scan each barcode, the corresponding part of your file will be reconstructed. Once all barcodes are scanned, your original file is complete and ready for download. It&apos;s that simple!</p>
           </div>
         </div>
-        <h2 className="text-3xl font-bold mb-4">Why Choose Us?</h2>
-        <ul className="text-lg mb-8 list-disc list-inside">
-          <li><span className="font-bold">Security First: </span>Your files never leave your devices, ensuring complete privacy and security.</li>
-          <li><span className="font-bold">No Internet Dependency: </span>Transfer files even when you have no internet connection.</li>
-          <li><span className="font-bold">Trust: </span>Don&apos;t take our word for it. This site is completely open source. Check out the source code on <Link href="https://github.com/Deeds67/qr-file-transfer">GitHub at https://github.com/Deeds67/qr-file-transfer</Link></li>
-        </ul>
+        <h2 className="text-3xl font-bold mb-4">Source code</h2>
+        <div className="mb-5">
+          <Link href="https://github.com/Deeds67/qr-file-transfer">Check out the source code on GitHub at&nbsp;
+            <span className="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">https://github.com/Deeds67/qr-file-transfer</span>
+          </Link>
+        </div>
         <Button size="lg">
           <Link href="/upload">
             Get started!
