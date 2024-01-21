@@ -1,4 +1,4 @@
-"use client";
+"use client"; // Not ideal, but `material-tailwind` doesn't support SSR.
 
 import { Button } from '@material-tailwind/react';
 import Image from 'next/image';
